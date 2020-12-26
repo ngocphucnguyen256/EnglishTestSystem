@@ -47,7 +47,7 @@ public class Conversation extends Question{
      */
     @Override
     public String toString() {
-        String str = this.getContent() + "\n";
+        String str = super.toString() + "\n";
         for(int e = 0,i = 0; i <= 4; i++){
             str += "Cau " + ++e + ": " + this.conversationChoices[i].getContent() +"\n";
             for(int k = 65,j = 0; j < 4; j++, k++){

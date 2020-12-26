@@ -21,14 +21,28 @@ public class Main {
      */
     public static void main(String[] args) {
         Scanner s= new Scanner(System.in);
-//        Choice[] ds = new Choice[5];
-//        String answer;
-//        ds[0] = new Choice("Chao", "cac cau");
-//        ds[1] = new Choice("AAAAA", "aaaaa");
-//        ds[2] = new Choice("BBBBB", "bbbbb");
-//        ds[3] = new Choice("CCCCC", "ccccccc");
+       Choice[] ds = new Choice[5];
+       String answer;
+       ds[0] = new Choice("Chao", "cac cau");
+       ds[1] = new Choice("AAAAA", "aaaaa");
+       ds[2] = new Choice("BBBBB", "bbbbb");
+       ds[3] = new Choice("CCCCC", "ccccccc");
 //       
-//        Question a = new MultipleChoice("AAAAA", 0, 0, ds, new Choice("Chao","cccc"));
+       MultipleChoice a = new MultipleChoice("AAAAA", 0, 0, ds, new Choice("Chao","cccc"));
+       MultipleChoice b = new MultipleChoice("AAAAA", 0, 0, ds, new Choice("Chao","cccc"));
+       MultipleChoice c = new MultipleChoice("AAAAA", 0, 0, ds, new Choice("Chao","cccc"));
+       MultipleChoice d = new MultipleChoice("AAAAA", 0, 0, ds, new Choice("Chao","cccc"));
+       MultipleChoice e = new MultipleChoice("AAAAA", 0, 0, ds, new Choice("Chao","cccc"));
+       MultipleChoice[] ad = new MultipleChoice[5];
+       ad[0] = a;
+       ad[1] = b;
+       ad[2] = c;
+       ad[3] = d;
+       ad[4] = e;
+              
+       Question as = new Conversation("Chao chao con cac", 0, 0, ad);
+        System.out.println(as);
+       
 //        Question b = new MultipleChoice("BBBBB", 0, 0, ds, new Choice("Chao","cccc"));
 //        Question c = new MultipleChoice("CCCCC", 0, 0, ds, new Choice("Chao","cccc"));
 //        Question d = new MultipleChoice("DDDDD", 0, 0, ds, new Choice("Chao","cccc"));
@@ -60,22 +74,22 @@ public class Main {
 //          
 //          System.out.println(Fuck);
 //          
-      try { 
-          Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection conn = DriverManager
-        .getConnection("jdbc:mysql://localhost:3306/englishtest", "root", "12345678");
+    //   try { 
+    //       Class.forName("com.mysql.cj.jdbc.Driver");
+    //     Connection conn = DriverManager
+    //     .getConnection("jdbc:mysql://localhost:3306/englishtest", "root", "12345678");
 
-        if (conn != null) {
-            System.out.println("Connected to the database!");
-        } else {
-            System.out.println("Failed to make connection!");
-        }
+    //     if (conn != null) {
+    //         System.out.println("Connected to the database!");
+    //     } else {
+    //         System.out.println("Failed to make connection!");
+    //     }
 
-    } catch (SQLException e) {
-        System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
+    //     } catch (SQLException e) {
+    //         System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //     }
     }
     
 }

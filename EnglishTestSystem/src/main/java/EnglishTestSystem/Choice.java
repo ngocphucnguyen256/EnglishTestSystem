@@ -22,6 +22,11 @@ public class Choice {
 //    public String toString() {
 //        return String.format(""); //To change body of generated methods, choose Tools | Templates.
 //    }
+
+    public Choice(String content) {
+        this.content = content;
+    }
+    
     
 
     /**
