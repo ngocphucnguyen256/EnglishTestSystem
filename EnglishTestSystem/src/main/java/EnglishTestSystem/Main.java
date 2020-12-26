@@ -58,7 +58,13 @@ public class Main {
           System.err.println("dang ky thanh cong");
           
           System.out.println(Fuck);
-          
+          UserList l= new UserList();
+          l.addUser(Fuck);
+          l.addUser(Fuck);
+
+          l.addUser(Fuck);
+          l.addUser(Fuck);
+        System.out.println(l);
   
        
       
