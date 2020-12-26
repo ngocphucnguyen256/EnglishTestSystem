@@ -8,6 +8,7 @@ package EnglishTestSystem;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
+import java.sql.*;
 
 /**
  *
@@ -41,34 +42,40 @@ public class Main {
 //        duMa.addQuestion(e);
 //        duMa.addQuestion(f);
 //        System.out.println(duMa);
-          User Fuck = new User();
-          System.out.println("Moi dm ban dang ki: ");
-          System.out.print("Ten: ");
-          Fuck.setName(s.nextLine());
-          System.out.print("Gioi Tinh: ");
-          Fuck.setGender(s.nextLine());
-          System.out.print("Que Quan: ");
-          Fuck.setHomeTown(s.nextLine());
-          int d, m, y;
-          System.out.print("Ngay sinh: ");
-          d = s.nextInt();
-          m = s.nextInt();
-          y = s.nextInt();
-          Fuck.setDateOfBirth(new GregorianCalendar(y,--m,d));       
-          System.err.println("dang ky thanh cong");
-          
-          System.out.println(Fuck);
-          UserList l= new UserList();
-          l.addUser(Fuck);
-          l.addUser(Fuck);
+//          User Fuck = new User();
+//          System.out.println("Moi dm ban dang ki: ");
+//          System.out.print("Ten: ");
+//          Fuck.setName(s.nextLine());
+//          System.out.print("Gioi Tinh: ");
+//          Fuck.setGender(s.nextLine());
+//          System.out.print("Que Quan: ");
+//          Fuck.setHomeTown(s.nextLine());
+//          int d, m, y;
+//          System.out.print("Ngay sinh: ");
+//          d = s.nextInt();
+//          m = s.nextInt();
+//          y = s.nextInt();
+//          Fuck.setDateOfBirth(new GregorianCalendar(y,--m,d));       
+//          System.err.println("dang ky thanh cong");
+//          
+//          System.out.println(Fuck);
+//          
+      try { 
+          Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection conn = DriverManager
+        .getConnection("jdbc:mysql://localhost:3306/englishtest", "root", "12345678");
 
-          l.addUser(Fuck);
-          l.addUser(Fuck);
-        System.out.println(l);
-  
-       
-      
-        
+        if (conn != null) {
+            System.out.println("Connected to the database!");
+        } else {
+            System.out.println("Failed to make connection!");
+        }
+
+    } catch (SQLException e) {
+        System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
     }
     
 }

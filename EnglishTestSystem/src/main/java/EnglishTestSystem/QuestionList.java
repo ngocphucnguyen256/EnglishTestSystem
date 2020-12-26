@@ -14,9 +14,6 @@ import java.util.List;
  */
 public class QuestionList {
      private List<Question> questions = new ArrayList<>();
-    public QuestionList(){
-        
-    }
     /**
      * them vao cau hoi
      * @param q cau hoi

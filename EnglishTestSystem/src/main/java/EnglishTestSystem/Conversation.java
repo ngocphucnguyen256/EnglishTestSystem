@@ -49,7 +49,7 @@ public class Conversation extends Question{
     public String toString() {
         String str = this.getContent() + "\n";
         for(int e = 0,i = 0; i <= 4; i++){
-            str += "Cau " + ++e + ": " + this.getContent() +"\n";
+            str += "Cau " + ++e + ": " + this.conversationChoices[i].getContent() +"\n";
             for(int k = 65,j = 0; j < 4; j++, k++){
                 str += "\t" +(char)k +"."+ 
                         this.conversationChoices[i].getChoices()[j].getContent() 
