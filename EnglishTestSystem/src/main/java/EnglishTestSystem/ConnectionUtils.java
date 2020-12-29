@@ -14,7 +14,7 @@ import java.sql.*;
 public class ConnectionUtils {
     private static final String hostName = "localhost";
     private static final String dbName = "englishtest";
-    private static final String userName = "host";
+    private static final String userName = "root";
     private static final String password = "12345678";
     private static final String connectionURL = "jdbc:mysql://" + hostName + ":3306/" + dbName;
     
@@ -35,10 +35,10 @@ public class ConnectionUtils {
     //         e.printStackTrace();
     //     }
  
-    public static Connection openConnection() throws SQLException {
+    public static Connection openConnection() throws SQLException, ClassNotFoundException {
         // 1. Load Driver
-        // Class.forName("com.mysql.jdbc.Driver");
-        DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+         Class.forName("com.mysql.cj.jdbc.Driver");
+//        DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
  
         // 2. Open connection
         return DriverManager.getConnection(connectionURL, userName, password);

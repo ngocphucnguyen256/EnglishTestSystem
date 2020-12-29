@@ -20,8 +20,12 @@ public class MultipleChoice extends Question{
     {
         id = ++count;
     }
-   
 
+    public MultipleChoice() {
+        super(null, 0, 0);
+    }
+   
+    
     public MultipleChoice(String content, int level, int kind, Choice[] choice, Choice answer) {
         super(content, level, kind);
         this.answer = answer;
