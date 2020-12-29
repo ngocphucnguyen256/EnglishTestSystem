@@ -11,6 +11,15 @@ public class UserList {
     public void removeUser (User u){
         this.users.remove(u);
     }
+    public User find (String name){
+        for(User u: this.users){
+            if(u.getName().compareTo(name)==0)
+                return u;
+        }
+        return null;
+    }
+    
+    
     @Override
     public String toString() {
         int count=1;

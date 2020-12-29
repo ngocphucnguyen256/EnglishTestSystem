@@ -9,6 +9,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
+import java.util.List;
 
 /**
  *
@@ -44,4 +47,35 @@ public class GetData {
        }
         return list;
     }
+   
+    public static UserList openGetDataUserList() throws SQLException, ClassNotFoundException{ 
+        String name, home, gender;
+        GregorianCalendar dateOfBirth = new GregorianCalendar();
+        GregorianCalendar dateStart = new GregorianCalendar();
+        Double aPoint;
+        String sqlSelect = "SELECT * FROM user";
+        UserList list = new UserList();
+       try(
+               Connection conn = ConnectionUtils.openConnection();
+               Statement st = conn.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+               ResultSet rs = st.executeQuery(sqlSelect);
+               
+               ){
+           while(rs.next()){
+               name = rs.getString(2);
+               home = rs.getString(3);
+               gender = rs.getString(4);
+               dateOfBirth= rs.getDate(5);
+               dateStart= rs.getDate(6);
+               List<Double> points = new ArrayList<>();
+               points = rs.getArray(points);
+               aPoint= rs.getDouble(10);
+               User u= new User(name, home, gender, dateOfBirth, dateStart, points, aPoint);
+               list.addUser(u);
+           }
+       }
+        return list;
+    }
+   
 }
