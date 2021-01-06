@@ -50,7 +50,7 @@ public class MultipleChoice extends Question{
 
     @Override
     public String toString() {
-        return String.format("\nCau %d: %s \n A. %s \n B. %s \n C. %s\n D. %s", this.id,
+        return String.format(" %s \n A. %s \n B. %s \n C. %s\n D. %s",
                     super.toString() , this.getChoices()[0].getContent(),
                     this.getChoices()[1].getContent(), this.getChoices()[2].getContent(),
                     this.getChoices()[3].getContent());

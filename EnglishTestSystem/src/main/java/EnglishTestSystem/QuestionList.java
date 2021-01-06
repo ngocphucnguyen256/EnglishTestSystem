@@ -76,8 +76,9 @@ public class QuestionList {
     @Override
     public String toString() {
         String str = "danh sach:\n";
+        int i = 1;
         for(Question s : this.questions){
-            str += s;
+            str += "Cau " + i++ + s;
         }
         return str;
     }
