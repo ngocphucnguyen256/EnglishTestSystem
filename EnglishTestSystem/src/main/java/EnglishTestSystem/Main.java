@@ -4,11 +4,10 @@
  * and open the template in the editor.
  */
 package EnglishTestSystem;
-
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.sql.Date;
 import java.util.Scanner;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -25,22 +24,40 @@ public class Main {
        UserList uList= new UserList();
        uList= GetData.openGetDataUserList();
        String inp;
-            do{
+       int choose;
+        do{
         System.out.println("Moi ban den voi he thong trac nghiem tieng anh sieu cap vjp pro\n"
                 + "\n0.Thoat\n1. Dang nhap\n"
                 + "2.Dang ki\n");
-        if(s.nextInt()==1)
+        choose=s.nextInt();
+        if(choose==1){
             System.out.println("Nhap ten: ");
             inp= s.nextLine();
                 if(uList.find(inp)!=null){
                     System.out.println("Dang nhap thanh cong\n");
                     System.out.println(uList.find(inp));break;}
                 else
-                    System.out.println("\nKhong tim thay ten trong he thong");
-            } 
-         
+                    System.out.println("\nKhong tim thay ten trong he thong");}
+         if(choose==2){
+             
+             String name,home,gender;
+             System.out.println("Nhap ten");
+             name=s.nextLine();
+             System.out.println("Nhap noi sinh");
+             home=s.nextLine();
+             System.out.println("Nhap gioi tinh");
+             gender=s.nextLine();
+             System.out.println("Nhap ngay thang nam sinh");
+             Date dateOfBirth = Date.valueOf(s.nextLine());
+             User u = new User(name, gender, home, dateOfBirth);
+             uList.addUser(u);      
+         }
+         if(choose==0){
+             System.exit(0);
+         }
+        }
         
-            while(true);
+    while(true);
       
        QuestionList list = new QuestionList();
        list = GetData.openGetData();

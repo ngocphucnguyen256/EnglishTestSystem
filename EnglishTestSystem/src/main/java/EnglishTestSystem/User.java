@@ -18,7 +18,7 @@ public class User {
     private String homeTown;
     private String gender;
     private Date dateOfBirth;
-    private Date dateStart;
+    private Date dateStart=new Date(System.currentTimeMillis());;
     private Double[] point;
     private Double averagePoint;
     {
@@ -34,6 +34,12 @@ public class User {
         this.dateStart=dateStart;
         this.point=point;
         this.averagePoint=aPoint;
+    }
+    public User(String name, String gender, String homeTown, Date dateOfBirth){
+        this.name=name;
+        this.gender=gender;
+        this.homeTown=homeTown;
+        this.dateOfBirth=dateOfBirth;
     }
     /**
      * @return the homeTown
