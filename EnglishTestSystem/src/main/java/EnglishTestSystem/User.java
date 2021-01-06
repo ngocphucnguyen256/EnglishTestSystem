@@ -6,9 +6,8 @@
 package EnglishTestSystem;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.sql.Date;
+import java.util.Arrays;
 
 /**
  *
@@ -18,14 +17,24 @@ public class User {
     private String name;
     private String homeTown;
     private String gender;
-    private GregorianCalendar dateOfBirth;
-    private GregorianCalendar dateStart = new GregorianCalendar();
-    private List<Double> point = new ArrayList<>();
+    private Date dateOfBirth;
+    private Date dateStart;
+    private Double[] point;
     private Double averagePoint;
     {
-        averagePoint =  getPoint().stream().mapToDouble(val -> val).average().orElse(0.0);
+        averagePoint =  Arrays.stream(point).mapToDouble(Double::intValue)
+      .sum();
     }
-
+    public User(String name, String gender, String homeTown, Date dateOfBirth, Date dateStart,
+            Double[] point, Double aPoint){
+        this.name=name;
+        this.gender=gender;
+        this.homeTown=homeTown;
+        this.dateOfBirth=dateOfBirth;
+        this.dateStart=dateStart;
+        this.point=point;
+        this.averagePoint=aPoint;
+    }
     /**
      * @return the homeTown
      */
@@ -58,22 +67,25 @@ public class User {
     /**
      * @return the point
      */
-    public List<Double> getPoint() {
+    public Double[] getPoint() {
         return point;
     }
 
-    /**
+     /**
      * @param point the point to set
      */
-    public void setPoint(List<Double> point) {
+    public void setPoint(Double[] point) {
         this.point = point;
     }
+    
+   
 
     @Override
     public String toString() {
         SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
         return String.format("Ten: %s\nGioi tinh: %s\nQue quan: %s\n"
-                + "Ngay Sinh: %s\nNgay gia nhap: %s\nDiem TB: %.1f\n", this.getName(), this.gender, this.homeTown, 
+                + "Ngay Sinh: %s\nNgay gia nhap: %s\nDiem TB: %.1f\n", 
+                this.getName(), this.gender, this.homeTown, 
                 f.format(this.dateOfBirth.getTime()),
                 f.format(this.dateStart.getTime()), this.averagePoint);
     }
@@ -95,31 +107,32 @@ public class User {
     /**
      * @return the dateOfBirth
      */
-    public GregorianCalendar getDateOfBirth() {
+    public Date getDateOfBirth() {
         return dateOfBirth;
     }
 
     /**
      * @param dateOfBirth the dateOfBirth to set
      */
-    public void setDateOfBirth(GregorianCalendar dateOfBirth) {
+    public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
     /**
      * @return the dateStart
      */
-    public GregorianCalendar getDateStart() {
+    public Date getDateStart() {
         return dateStart;
     }
 
     /**
      * @param dateStart the dateStart to set
      */
-    public void setDateStart(GregorianCalendar dateStart) {
+    public void setDateStart(Date dateStart) {
         this.dateStart = dateStart;
     }
-    
+
+   
     
     
 }
