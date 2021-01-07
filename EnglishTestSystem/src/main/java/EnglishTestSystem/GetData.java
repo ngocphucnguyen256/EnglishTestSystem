@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -51,7 +53,7 @@ public class GetData {
         String name, home, gender;
         Date dateOfBirth;
         Date dateStart;
-        Double aPoint;
+        String stringPoint;
         String sqlSelect = "SELECT * FROM user";
         UserList list = new UserList();
        try(
@@ -67,12 +69,16 @@ public class GetData {
                gender = rs.getString(4);
                dateOfBirth= rs.getDate(5);
                dateStart= rs.getDate(6);
-               Double[] points=null;
-               for(int i=7, j=0; i<=11;i++){
-                   points[j] = rs.getDouble(i);
+               List<Double> point =new ArrayList<>();
+               stringPoint=rs.getString(7);
+           
+               String[] arrayPoint =stringPoint.split(",");
+        
+               for(String v: arrayPoint){
+                
+                   point.add(Double.parseDouble(v));
                }
-               aPoint= rs.getDouble(12);
-               User u= new User(name, home, gender, dateOfBirth, dateStart, points, aPoint);
+               User u= new User(name, home, gender, dateOfBirth, dateStart, point);
                list.addUser(u);
            }
        }

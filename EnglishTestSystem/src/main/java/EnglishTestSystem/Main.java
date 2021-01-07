@@ -21,6 +21,7 @@ public class Main {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         
        Scanner s= new Scanner(System.in);
+       //Nhap nguoi dung
        UserList uList= new UserList();
        uList= GetData.openGetDataUserList();
        String inp;
@@ -56,8 +57,8 @@ public class Main {
              System.exit(0);
          }
         }
-        
     while(true);
+  //Ket thuc nhap nguoi dung
       
        QuestionList list = new QuestionList();
        list = GetData.openGetData();

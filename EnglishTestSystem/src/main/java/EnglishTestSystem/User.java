@@ -7,7 +7,9 @@ package EnglishTestSystem;
 
 import java.text.SimpleDateFormat;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  *
@@ -19,21 +21,21 @@ public class User {
     private String gender;
     private Date dateOfBirth;
     private Date dateStart=new Date(System.currentTimeMillis());;
-    private Double[] point;
+    private List<Double> point= new ArrayList<>();
     private Double averagePoint;
     {
-        averagePoint =  Arrays.stream(point).mapToDouble(Double::intValue)
-      .sum();
+
+        setAveragePoint((Double) getPoint().stream().mapToDouble(a->a).average().orElse(0));
+
     }
     public User(String name, String gender, String homeTown, Date dateOfBirth, Date dateStart,
-            Double[] point, Double aPoint){
+            List<Double> point){
         this.name=name;
         this.gender=gender;
         this.homeTown=homeTown;
         this.dateOfBirth=dateOfBirth;
         this.dateStart=dateStart;
         this.point=point;
-        this.averagePoint=aPoint;
     }
     public User(String name, String gender, String homeTown, Date dateOfBirth){
         this.name=name;
@@ -70,30 +72,24 @@ public class User {
     }
 
     
-    /**
-     * @return the point
-     */
-    public Double[] getPoint() {
-        return point;
-    }
+  
 
-     /**
-     * @param point the point to set
-     */
-    public void setPoint(Double[] point) {
-        this.point = point;
-    }
     
    
 
     @Override
     public String toString() {
         SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
-        return String.format("Ten: %s\nGioi tinh: %s\nQue quan: %s\n"
-                + "Ngay Sinh: %s\nNgay gia nhap: %s\nDiem TB: %.1f\n", 
-                this.getName(), this.gender, this.homeTown, 
-                f.format(this.dateOfBirth.getTime()),
-                f.format(this.dateStart.getTime()), this.averagePoint);
+        String str;
+        int count=0;
+        str="\nTen: "+ this.name +"\nGioi tinh: "+this.gender+"\n Que quan: "
+                +this.homeTown +"\n Ngay sinh: "+f.format(this.dateOfBirth.getTime())+
+                "\n Ngay bat dau: "+f.format(this.dateStart.getTime())+"\nCac lan lam kiem tra:\n"
+                ;
+        for(Double d: this.point){
+            str+="\tLan "+ ++count +": "+ d+"\n";
+        }
+        return str+="Diem trung binh: "+this.averagePoint;
     }
 
     /**
@@ -138,7 +134,30 @@ public class User {
         this.dateStart = dateStart;
     }
 
-   
+     public Double getAveragePoint() {
+        return getPoint().stream().mapToDouble(a->a).average().orElse(0);
+    }
+
+    /**
+     * @param averagePoint the averagePoint to set
+     */
+    public void setAveragePoint(Double averagePoint) {
+        this.averagePoint = averagePoint;
+    }
+
+    /**
+     * @return the point
+     */
+    public List<Double> getPoint() {
+        return point;
+    }
+
+    /**
+     * @param point the point to set
+     */
+    public void setPoint(List<Double> point) {
+        this.point = point;
+    }
     
     
 }
