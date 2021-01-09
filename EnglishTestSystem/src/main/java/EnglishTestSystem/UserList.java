@@ -13,7 +13,7 @@ public class UserList {
     }
     public User find (String name){
         for(User u: this.users){
-            if(u.getName().compareTo(name)==0)
+            if(name.compareTo(u.getName()) == 0)
                 return u;
         }
         return null;
@@ -25,7 +25,7 @@ public class UserList {
         int count=1;
         String str="User list: \n";
         for(User u: this.users){
-            str+="STT: " +count++ +"\n";
+            str+="STT: " + count++;
             str+=u;
         }
         return str;

@@ -10,7 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +17,13 @@ import java.util.List;
  *
  * @author Admin
  */
-public class GetData {
+public class DataBase {
+    /**
+     * Hàm lấy dữ liệu câu hỏi từ dataBase
+     * @return list Question
+     * @throws SQLException
+     * @throws ClassNotFoundException 
+     */
     public static QuestionList openGetData() throws SQLException, ClassNotFoundException{        
         Choice ans;
         int l, k;
@@ -48,7 +53,12 @@ public class GetData {
        }
         return list;
     }
-   
+   /**
+    * hàm lấy về danh sách học viên
+    * @return list user
+    * @throws SQLException
+    * @throws ClassNotFoundException 
+    */
     public static UserList openGetDataUserList() throws SQLException, ClassNotFoundException{ 
         String name, home, gender;
         Date dateOfBirth;
@@ -78,11 +88,33 @@ public class GetData {
                 
                    point.add(Double.parseDouble(v));
                }
-               User u= new User(name, home, gender, dateOfBirth, dateStart, point);
+               User u= new User(name,gender, home, dateOfBirth, dateStart, point);
                list.addUser(u);
            }
        }
         return list;
     }
+    
+    public static void openSetDataUser(User studier) throws SQLException, ClassNotFoundException{
+        
+        try (
+            Connection con = ConnectionUtils.openConnection();
+            Statement st = con.createStatement(
+                    ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
+        ){
+//            String points = "";
+//            if(studier.getPoint() != null){
+//            for(Double s : studier.getPoint()){
+//                points += Double.toString(s) + ",";
+//            }}
+            String sqlInsert = "INSERT INTO englishtest.user(name, home, gender, birth, start) "
+                    + " VALUE('" + studier.getName() +"', '" + studier.getHomeTown() + 
+                    "', '" + studier.getGender() + "', '" + studier.getDateOfBirth() + 
+                    "', '" + studier.getDateStart() + "');";
+            st.executeUpdate(sqlInsert);
+            
+        }
+    
+}
    
 }

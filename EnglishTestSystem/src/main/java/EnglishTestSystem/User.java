@@ -8,7 +8,6 @@ package EnglishTestSystem;
 import java.text.SimpleDateFormat;
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -89,7 +88,7 @@ public class User {
         for(Double d: this.point){
             str+="\tLan "+ ++count +": "+ d+"\n";
         }
-        return str+="Diem trung binh: "+this.averagePoint;
+        return str+="Diem trung binh: "+ this.getAveragePoint() +"\n";
     }
 
     /**
@@ -135,7 +134,7 @@ public class User {
     }
 
      public Double getAveragePoint() {
-        return getPoint().stream().mapToDouble(a->a).average().orElse(0);
+        return this.point.stream().mapToDouble(a->a).average().orElse(0);
     }
 
     /**

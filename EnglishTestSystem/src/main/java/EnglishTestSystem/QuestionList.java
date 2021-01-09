@@ -78,7 +78,7 @@ public class QuestionList {
         String str = "danh sach:\n";
         int i = 1;
         for(Question s : this.questions){
-            str += "Cau " + i++ + s;
+            str += "\nCau " + i++ + s;
         }
         return str;
     }
