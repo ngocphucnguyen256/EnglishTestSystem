@@ -7,6 +7,7 @@ package EnglishTestSystem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  *
@@ -21,6 +22,7 @@ public class QuestionList {
     public void addQuestion(Question q)
     {
         this.questions.add(q);
+     
     }
     /**
      * xoa cau hoi
@@ -84,6 +86,24 @@ public class QuestionList {
     }
 
     
-    
-    
+    public String show(int choose){
+        Scanner s= new Scanner(System.in);
+        String str="\n";
+        int chance=0; //ti le tra loi dung
+        int count=1;
+       while (count<=choose){
+            for(Question q: this.questions){
+                System.out.println("\nCau " + count++ + q); 
+                System.out.println("\nNhap cau tra loi:");
+                String ans= s.nextLine();
+                str+= "Cau"+count+": ";
+                str+= q.checkAnswer(ans)+"\n";
+                if (q.checkAnswer(ans)=="Dung"){
+                    chance+=1;
+                }
+            } 
+        }
+       return str+ "So cau tra loi dung: "+chance+"/"+choose+"\n";
+    }
+   
 }

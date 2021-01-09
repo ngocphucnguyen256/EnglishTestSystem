@@ -31,22 +31,7 @@ public class MultipleChoice extends Question{
         this.answer = answer;
         this.choices = choice;
     }
-
-    @Override
-    public void checkAnswer(String ans) {
-        int a = 65;
-        int b = 97;
-        int c = ans.charAt(0);
-        for(int i = 0; i <= 3; i++){
-            if (c == a++ || c == b++)
-                ans = this.getChoices()[i].getContent();
-        }
-        if(ans.compareTo(this.getAnswer().getContent()) == 0)
-            System.out.println("Dung");
-        else
-            System.out.println("Sai!!");
-        
-    }
+   
 
     @Override
     public String toString() {
@@ -57,7 +42,20 @@ public class MultipleChoice extends Question{
         
          
     }
-
+     public String checkAnswer(String ans) {
+        int a = 65;
+        int b = 97;
+        int c = ans.charAt(0);
+        for(int i = 0; i <= 3; i++){
+            if (c == a++ || c == b++)
+                ans = this.getChoices()[i].getContent();
+        }
+        if(ans.compareTo(this.getAnswer().getContent()) == 0)
+            return("Dung");
+        else
+            return("Sai!!");
+        
+    }
     /**
      * @return the choices
      */

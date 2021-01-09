@@ -25,8 +25,8 @@ abstract class Question {
         this.kind = kind;
     }
     
-    public void checkAnswer(String ans){
- 
+    public String checkAnswer(String ans){
+         return null;
     }
 
     @Override
