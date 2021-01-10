@@ -19,9 +19,10 @@ public class Conversation extends Question{
     
     
     @Override
-    public void checkAnswer(String ans){
+    public String checkAnswer(String ans){
         String[] s = ans.split(",");
         int j=0;
+        int chance=0;
         for(String item : s){
             System.out.println(item);
             Choice[] cC = new Choice[5];
@@ -33,13 +34,14 @@ public class Conversation extends Question{
                 if (c == a++ || c == b++)
                     ans = cC[i].getContent();
             }
-            if(ans.compareTo(this.conversationChoices[j].getAnswer().getContent()) == 0)
+            if(ans.compareTo(this.conversationChoices[j].getAnswer().getContent()) == 0){
                 System.out.println("Dung");
+                chance+=1;}
             else
                 System.out.println("Sai!!");
             j++;
             }
-
+        return ("So cau tra loi dung"+chance);
     }
     /**
      * ghi đè toString

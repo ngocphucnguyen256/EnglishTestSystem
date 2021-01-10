@@ -7,10 +7,14 @@ package EnglishTestSystem;
 import java.sql.Date;
 import java.util.Scanner;
 import java.sql.*;
+<<<<<<< HEAD
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+=======
+import java.util.*;
+>>>>>>> 0464b92fc8fbad628c4b20a9397ffd448dc30a18
 /**
  *
  * @author Admin
@@ -68,6 +72,7 @@ public class Main {
         }
     while(true);
   //Ket thuc nhap nguoi dung
+<<<<<<< HEAD
       
        QuestionList list = new QuestionList();
        list = DataBase.openGetData();
@@ -78,6 +83,39 @@ public class Main {
        
 
 
+=======
+  
+        System.out.println("\n--------Luyen tap-----------\n Moi chon dang cau hoi:"
+                + "\n1.Multiple choice\n 2.Incomplete \n3.Conversation\n Chon=: ");
+        choose= s.nextInt();
+        s.nextLine();
+        
+        if(choose==1)
+        {
+            QuestionList list = new QuestionList();
+            System.out.println("\nNhap so cau hoi:");
+            choose=s.nextInt();
+            s.nextLine();
+            list =DataBase.openGetData(); //Lay list
+            Collections.shuffle((List<?>) list); //Trao list
+            System.out.println(list.show(choose)); //Nhap cau tra loi xong xuat
+        }
+        else if(choose==2){
+            Question q;
+            System.out.println("\nNhap muc do cau hoi:");
+            choose=s.nextInt();
+            s.nextLine();
+            //xu li
+        }
+        else{
+            Question q;
+            System.out.println("\nNhap muc do cau hoi:");
+            choose=s.nextInt();
+            s.nextLine();
+            //xu li
+        }
+ 
+>>>>>>> 0464b92fc8fbad628c4b20a9397ffd448dc30a18
     }
     
 }

@@ -17,10 +17,12 @@ public class Incomplete extends Question{
         this.incompleteChoices = incomplete;
     }
     
-    public void checkAnswer(String ans){
+        @Override
+    public String checkAnswer(String ans){
         String[] s = ans.split(",");
-        
+        int chance=0;
         int j=0;
+        
         for(String item : s){
             System.out.println(item);
             Choice[] iC = new Choice[5];
@@ -32,12 +34,14 @@ public class Incomplete extends Question{
                 if (c == a++ || c == b++)
                     ans = iC[i].getContent();
             }
-            if(ans.compareTo(this.incompleteChoices[j].getAnswer().getContent()) == 0)
+            if(ans.compareTo(this.incompleteChoices[j].getAnswer().getContent()) == 0){
                 System.out.println("Dung");
+                chance+=1;}
             else
                 System.out.println("Sai!!");
             j++;
             }
+        return ("So cau tro loi dung: "+chance);
     } 
 
     @Override
