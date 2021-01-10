@@ -81,12 +81,13 @@ public class DataBase {
                dateStart= rs.getDate(6);
                List<Double> point =new ArrayList<>();
                stringPoint=rs.getString(7);
-           
-               String[] arrayPoint =stringPoint.split(",");
-        
-               for(String v: arrayPoint){
-                
-                   point.add(Double.parseDouble(v));
+               if(stringPoint != null){
+                    String[] arrayPoint =stringPoint.split(",");
+
+                    for(String v: arrayPoint){
+
+                        point.add(Double.parseDouble(v));
+                    }
                }
                User u= new User(name,gender, home, dateOfBirth, dateStart, point);
                list.addUser(u);
@@ -102,11 +103,6 @@ public class DataBase {
             Statement st = con.createStatement(
                     ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
         ){
-//            String points = "";
-//            if(studier.getPoint() != null){
-//            for(Double s : studier.getPoint()){
-//                points += Double.toString(s) + ",";
-//            }}
             String sqlInsert = "INSERT INTO englishtest.user(name, home, gender, birth, start) "
                     + " VALUE('" + studier.getName() +"', '" + studier.getHomeTown() + 
                     "', '" + studier.getGender() + "', '" + studier.getDateOfBirth() + 
@@ -115,6 +111,27 @@ public class DataBase {
             
         }
     
-}
+    }
    
+    public static void openUpDateDataUser(User studier, int countDB) throws SQLException, ClassNotFoundException{
+        try (
+            Connection con = ConnectionUtils.openConnection();
+            Statement st = con.createStatement(
+                    ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
+        ){
+                String points = "";
+                for(Double s: studier.getPoint()){
+                    points += Double.toString(s) + ",";
+                }
+                
+                String sqlUpdate = "UPDATE user SET name = '"+ studier.getName() +"',"
+                        + "home = '" + studier.getHomeTown() + "', "
+                        + "gender = '" + studier.getGender() + "', "
+                        + "birth = '" + studier.getDateOfBirth() + "', "
+                        + "start = '" + studier.getDateStart() + "', "
+                        + "points = '" + points
+                        + "' WHERE (id = '"+ countDB +"');";
+                st.executeUpdate(sqlUpdate);
+        }
+    }
 }

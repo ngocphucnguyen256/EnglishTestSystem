@@ -85,7 +85,7 @@ public class User {
                 +this.homeTown +"\n Ngay sinh: "+f.format(this.dateOfBirth.getTime())+
                 "\n Ngay bat dau: "+f.format(this.dateStart.getTime())+"\nCac lan lam kiem tra:\n"
                 ;
-        for(Double d: this.point){
+        for(Double d: this.getPoint()){
             str+="\tLan "+ ++count +": "+ d+"\n";
         }
         return str+="Diem trung binh: "+ this.getAveragePoint() +"\n";
@@ -134,7 +134,7 @@ public class User {
     }
 
      public Double getAveragePoint() {
-        return this.point.stream().mapToDouble(a->a).average().orElse(0);
+        return this.getPoint().stream().mapToDouble(a->a).average().orElse(0);
     }
 
     /**
@@ -157,6 +157,8 @@ public class User {
     public void setPoint(List<Double> point) {
         this.point = point;
     }
+
+
     
     
 }

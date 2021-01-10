@@ -1,5 +1,6 @@
 package EnglishTestSystem;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +18,13 @@ public class UserList {
                 return u;
         }
         return null;
+    }
+    
+    public void upDateDB() throws SQLException, ClassNotFoundException{
+        int count = 1;
+        for(User u : this.users){
+            DataBase.openUpDateDataUser(u, count++);
+        }
     }
     
     

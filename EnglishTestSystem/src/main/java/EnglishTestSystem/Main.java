@@ -8,6 +8,8 @@ import java.sql.Date;
 import java.util.Scanner;
 import java.sql.*;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -57,7 +59,8 @@ public class Main {
              System.out.println("Nhap ngay thang nam sinh");
              Date dateOfBirth = Date.valueOf(s.nextLine());
              User u = new User(name, gender, home, dateOfBirth);
-             uList.addUser(u);      
+             uList.addUser(u);
+             DataBase.openSetDataUser(u);
          }
          if(choose==0){
              System.exit(0);
@@ -69,8 +72,9 @@ public class Main {
        QuestionList list = new QuestionList();
        list = DataBase.openGetData();
         System.out.println(list);
-        studier.getPoint().add(10.0);
-        
+        studier.getPoint().add(9.5);
+        System.out.println(studier);
+        uList.upDateDB();
        
 
 
