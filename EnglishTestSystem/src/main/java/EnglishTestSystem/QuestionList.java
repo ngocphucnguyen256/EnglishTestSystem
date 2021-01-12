@@ -6,8 +6,10 @@
 package EnglishTestSystem;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collector;
 
 /**
  *
@@ -86,25 +88,57 @@ public class QuestionList {
     }
 
     
-    public String show(int choose){
+    public Double show(int choose){
         Scanner s= new Scanner(System.in);
         String str="\n";
         int chance=0; //ti le tra loi dung
         int count=1;
+        Collections.shuffle(this.questions);
+        while (count <= choose){
         for(Question q: this.questions){
-                while (count<=choose){
-            
-                    System.out.println("\nCau " + count++ + q); 
+                    System.out.println("\nCau " + count + q); 
                     System.out.println("\nNhap cau tra loi:");
                     String ans= s.nextLine();
                     str+= "Cau"+count+": ";
-                    str+= q.checkAnswer(ans)+"\n";
+                    str += q.showAnswer();
+                    str+= "Tra loi: " + q.checkAnswer(ans)+"\n";
+                    
                     if (q.checkAnswer(ans)=="Dung"){
                         chance+=1;
                     }
+                    count++;
+                    if(count > choose)
+                        break;
                 } 
         }
-       return str+ "So cau tra loi dung: "+chance+"/"+choose+"\n";
+        System.out.println(str+ "So cau tra loi dung: "+chance+"/"+choose+"\n");
+        return 10.0/choose*chance;
     }
-   
+    
+    public QuestionList getMultiple(){
+        QuestionList list = new QuestionList();
+        for(Question a : this.questions){
+            if(a instanceof MultipleChoice)
+                list.addQuestion(a);
+        }
+        return list;
+    }
+    
+    public QuestionList getIncomplete(){
+        QuestionList list = new QuestionList();
+        for(Question a : this.questions){
+            if(a instanceof Incomplete)
+                list.addQuestion(a);
+        }
+        return list;
+    }
+    
+    public QuestionList getConversation(){
+        QuestionList list = new QuestionList();
+        for(Question a : this.questions){
+            if(a instanceof Conversation)
+                list.addQuestion(a);
+        }
+        return list;
+    }
 }

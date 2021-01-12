@@ -38,7 +38,12 @@ public class MultipleChoice extends Question{
         this.choices = choice;
     }
     
-    
+    public String showAnswer(){
+           String str = this.getContent() + "\n";
+           str += "Dap an: " + this.getAnswer().getContent();
+           str += "\nGiai thich: " + this.getAnswer().getExplaination() + "\n";
+           return str;
+    }
 
     @Override
     public String toString() {

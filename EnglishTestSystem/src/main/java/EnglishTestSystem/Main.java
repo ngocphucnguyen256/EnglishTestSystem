@@ -78,7 +78,7 @@ public class Main {
 //          System.out.println(studier);
 //          uList.upDateDB();
        
-
+        QuestionList listData = DataBase.openGetData();
   
         System.out.println("\n--------Luyen tap-----------\n Moi chon dang cau hoi:"
                 + "\n1.Multiple choice\n 2.Incomplete \n3.Conversation\n Chon=: ");
@@ -91,8 +91,8 @@ public class Main {
             System.out.println("\nNhap so cau hoi:");
             choose=s.nextInt();
             s.nextLine();
-            list =DataBase.openGetData(); //Lay list
-            Collections.shuffle((List<?>) list); //Trao list
+            list = listData.getMultiple();
+//            Collections.shuffle((List<?>) list); //Trao list
             System.out.println(list.show(choose)); //Nhap cau tra loi xong xuat
         }
         else if(choose==2){
