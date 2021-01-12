@@ -54,7 +54,8 @@ public class MultipleChoice extends Question{
         
          
     }
-     public String checkAnswer(String ans) {
+    @Override
+     public int checkAnswer(String ans) {
         int a = 65;
         int b = 97;
         int c = ans.charAt(0);
@@ -63,9 +64,9 @@ public class MultipleChoice extends Question{
                 ans = this.getChoices()[i].getContent();
         }
         if(ans.compareTo(this.getAnswer().getContent()) == 0)
-            return("Dung");
+            return 1;
         else
-            return("Sai!!");
+            return 2;
         
     }
     /**

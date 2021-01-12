@@ -17,14 +17,25 @@ public class Incomplete extends Question{
         this.incompleteChoices = incomplete;
     }
     
+    
+     @Override
+    public String showAnswer(){
+         String str = super.toString() + "\n";
+        for(int e = 1, i = 0; i < this.incompleteChoices.length ; i++){
+            str += "\nCau " + e++ + " :\n";
+            str += "\tDap an : " + this.incompleteChoices[i].getAnswer().getContent();
+            str += "\n\t giai thich : " + this.incompleteChoices[i].getAnswer().getExplaination();
+            }           
+        return str;
+    }
+    
         @Override
-    public String checkAnswer(String ans){
+    public int checkAnswer(String ans){
         String[] s = ans.split(",");
         int chance=0;
         int j=0;
         
         for(String item : s){
-            System.out.println(item);
             Choice[] iC = new Choice[5];
             iC = this.incompleteChoices[j].getChoices();
             int a = 65;
@@ -35,13 +46,13 @@ public class Incomplete extends Question{
                     ans = iC[i].getContent();
             }
             if(ans.compareTo(this.incompleteChoices[j].getAnswer().getContent()) == 0){
-                System.out.println("Dung");
+                System.out.println("Cau " + ++j + ": Dung!!");
                 chance+=1;}
             else
-                System.out.println("Sai!!");
-            j++;
+                System.out.println("Cau " + ++j + ": Sai!!");
+            if(j > 5) break;
             }
-        return ("So cau tro loi dung: "+chance);
+        return chance;
     } 
 
     @Override

@@ -17,14 +17,23 @@ public class Conversation extends Question{
         this.conversationChoices = conversationChoices;
     }
     
+    @Override
+    public String showAnswer(){
+         String str = super.toString() + "\n";
+        for(int e = 0,i = 0; i < this.conversationChoices.length ; i++){
+            str += "\nCau " + ++e + ": " + this.conversationChoices[i].getContent() +"\n";
+            str += "\t Dap an : " + this.conversationChoices[i].getAnswer().getContent();
+            str += "\n\t giai thich : " + this.conversationChoices[i].getAnswer().getExplaination();
+            }           
+        return str;
+    }
     
     @Override
-    public String checkAnswer(String ans){
+    public int checkAnswer(String ans){
         String[] s = ans.split(",");
         int j=0;
         int chance=0;
         for(String item : s){
-            System.out.println(item);
             Choice[] cC = new Choice[5];
             cC = this.conversationChoices[j].getChoices();
             int a = 65;
@@ -35,13 +44,12 @@ public class Conversation extends Question{
                     ans = cC[i].getContent();
             }
             if(ans.compareTo(this.conversationChoices[j].getAnswer().getContent()) == 0){
-                System.out.println("Dung");
+                System.out.println("Cau " + ++j + ": Dung!!");
                 chance+=1;}
             else
-                System.out.println("Sai!!");
-            j++;
+                System.out.println("Cau " + ++j + ": Sai!!");
             }
-        return ("So cau tra loi dung"+chance);
+        return chance;
     }
     /**
      * ghi đè toString

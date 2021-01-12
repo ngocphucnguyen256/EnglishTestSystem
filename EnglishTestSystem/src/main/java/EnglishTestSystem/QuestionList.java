@@ -39,13 +39,13 @@ public class QuestionList {
      * @param l: muc do cau hoi(1,2,3)
      * @return List cau hoi
      */
-    public List<Question> find(int l)
+    public QuestionList find(int l)
     {
-      List <Question> temp =new ArrayList<>();
+      QuestionList temp =new QuestionList();
         for(Question q : this.questions)
         {
             if(q.getLevel()==l)
-                temp.add(q);
+                temp.addQuestion(q);
         }
         return temp;
     }
@@ -54,11 +54,11 @@ public class QuestionList {
      * @param c: chuoi ky tu
      * @return List cau hoi
      */
-    public List<Question> find(String kw){
-        List<Question> temp = new ArrayList<>();
+    public QuestionList find(String kw){
+        QuestionList temp = new QuestionList();
         for(Question q : this.questions){
             if(q.getContent().contains(kw))
-                temp.add(q);
+                temp.addQuestion(q);
         }
         return temp;
     }
@@ -67,12 +67,12 @@ public class QuestionList {
      * @param k: so nguyen
      * @return List cau hoi
      */
-    public List<Question> findKind(int k){
-        List <Question> temp =new ArrayList<>();
+    public QuestionList findKind(int k){
+        QuestionList temp =new QuestionList();
         for(Question q : this.questions)
         {
             if(q.getKind()==k)
-                temp.add(q);
+                temp.addQuestion(q);
         }
         return temp;
     }
@@ -87,7 +87,11 @@ public class QuestionList {
         return str;
     }
 
-    
+    /**
+     * 
+     * @param choose
+     * @return 
+     */
     public Double show(int choose){
         Scanner s= new Scanner(System.in);
         String str="\n";
@@ -99,13 +103,15 @@ public class QuestionList {
                     System.out.println("\nCau " + count + q); 
                     System.out.println("\nNhap cau tra loi:");
                     String ans= s.nextLine();
-                    str+= "Cau"+count+": ";
-                    str += q.showAnswer();
-                    str+= "Tra loi: " + q.checkAnswer(ans)+"\n";
-                    
-                    if (q.checkAnswer(ans)=="Dung"){
+                    str+= "Cau"+count+": "+ q.showAnswer();                    
+                    if (q.checkAnswer(ans)== 1){
                         chance+=1;
+                        str += "\n Tra loi: Dung !!\n";
                     }
+                    else 
+                        str += "\n Tra loi: Sai !!\n";
+                    
+
                     count++;
                     if(count > choose)
                         break;
@@ -115,6 +121,52 @@ public class QuestionList {
         return 10.0/choose*chance;
     }
     
+    public Double showIncomplete(){
+        Scanner s = new Scanner(System.in);
+        String ans = "";
+        int chance = 0;
+        double countPoint = 5.0;
+        Collections.shuffle(this.questions);
+        for(Question a : this.questions){
+            System.out.println("=======Incomplete======");
+            System.out.println(a);
+            System.out.println("Nhap cau tra loi(?,?,?,..) : ");
+            for(int j = 1, i = 0; i < 5; i++){
+                System.out.println("Cau " + j++ + " : ");
+                String temp = s.nextLine();
+                ans += temp + ",";
+            }
+            ans = s.nextLine();
+            chance = a.checkAnswer(ans);
+            System.out.println(a.showAnswer());
+            break;
+        }
+        
+        return 10.0/countPoint * chance;
+    }
+    
+    public Double showConversation(){
+        Scanner s = new Scanner(System.in);
+        String ans= "";
+        int chance = 0;
+        double countPoint = 10.0;
+        Collections.shuffle(this.questions);
+        for(Question a : this.questions){
+            System.out.println("=======CONVERSATION======");
+            System.out.println(a);
+            System.out.println("Nhap cau tra loi(?,?,?,..) : ");
+            for(int j = 1, i = 0; i < 10; i++){
+                System.out.println("Cau " + j++ + " : ");
+                String temp = s.nextLine();
+                ans += temp + ",";
+            }
+            chance = a.checkAnswer(ans);
+            System.out.println(a.showAnswer());
+            break;
+        }
+        
+        return 10.0/countPoint * chance;
+    }
     public QuestionList getMultiple(){
         QuestionList list = new QuestionList();
         for(Question a : this.questions){

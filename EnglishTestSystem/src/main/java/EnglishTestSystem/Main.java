@@ -96,17 +96,21 @@ public class Main {
             System.out.println(list.show(choose)); //Nhap cau tra loi xong xuat
         }
         else if(choose==2){
-            Question q;
+            QuestionList list = new QuestionList();
             System.out.println("\nNhap muc do cau hoi:");
             choose=s.nextInt();
             s.nextLine();
+            list = listData.getIncomplete().find(choose);
+            System.out.println(list.showIncomplete());
             //xu li
         }
         else{
-            Question q;
+            QuestionList list = new QuestionList();
             System.out.println("\nNhap muc do cau hoi:");
             choose=s.nextInt();
             s.nextLine();
+            list = listData.getConversation().find(choose);
+            System.out.println(list.showConversation());
             //xu li
         }
  

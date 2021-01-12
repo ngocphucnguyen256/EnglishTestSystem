@@ -28,8 +28,8 @@ abstract class Question {
     public String showAnswer(){
         return null;
     }
-    public String checkAnswer(String ans){
-         return null;
+    public int checkAnswer(String ans){
+         return 0;
     }
 
     @Override
