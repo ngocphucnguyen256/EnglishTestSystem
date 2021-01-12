@@ -27,7 +27,7 @@ public class DataBase {
     public static QuestionList openGetData() throws SQLException, ClassNotFoundException{        
         Choice ans;
         int l, k;
-        String cont;
+        String content;
         String sqlSelect = "SELECT * FROM multiplechoice";
         QuestionList list = new QuestionList();
        try(
@@ -38,7 +38,7 @@ public class DataBase {
                
                ){
            while(rs.next()){
-               cont = rs.getString(2);
+               content = rs.getString(2);
                l = rs.getInt(3);
                k = rs.getInt(4);
                Choice[] c = new Choice[4];
@@ -47,10 +47,94 @@ public class DataBase {
                    c[i] = new Choice(rs.getString(j));
                }
                ans = new Choice(rs.getString(9),rs.getString(10));
-               Question mul = new MultipleChoice(cont, l, k, c, ans);
+               Question mul = new MultipleChoice(content, l, k, c, ans);
                list.addQuestion(mul);
            }
        }
+       
+       /////////////////////////////////////////////////////////////////////////
+       ////////////////////////////////////////////////////////////////////////
+        String sqlSelect2 = "SELECT * FROM multiple_to WHERE id_incomplete =";
+        String sqlSelect1 = "SELECT * FROM incomplete";
+       int flag1 = 1;
+
+       try(
+               Connection conn = ConnectionUtils.openConnection();
+               Statement st = conn.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+               ResultSet rs = st.executeQuery(sqlSelect1);
+               ){
+           while(rs.next()){
+               content = rs.getString(2);
+               l = rs.getInt(3);
+               k = rs.getInt(4);
+               MultipleChoice[] mul = new MultipleChoice[5];
+               int flag2 = 0;
+               try(
+                    Statement stt = conn.createStatement(
+                         ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                    ResultSet rss = stt.executeQuery(sqlSelect2 + flag1++);
+                    ){
+                while(rss.next()){
+                    String cont = rss.getString(2);
+                    Choice[] c = new Choice[4];
+                        for(int j = 3,i = 0; i < 4; i++,j++){
+                            c[i] = new Choice(rss.getString(j));
+                        }
+                    Choice answer = new Choice(rss.getString(7),rss.getString(8));
+                    mul[flag2] = new MultipleChoice(cont, c, answer);
+                    flag2++;
+                    
+                    }
+                } 
+               Question incomple = new Incomplete(content, l, k, mul);
+               list.addQuestion(incomple);
+               
+           }
+           }
+       ////////////////////////////////////////////////////////////////////////
+       ///////////////////////////////////////////////////////////////////////
+       /**
+        * lay du lieu Conversation
+        */
+            String sqlSelect4 = "SELECT * FROM multiple_to WHERE id_conversation =";
+            String sqlSelect3 = "SELECT * FROM conversation";
+            flag1 = 1;
+
+            try(
+                    Connection conn = ConnectionUtils.openConnection();
+                    Statement st = conn.createStatement(
+                         ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                    ResultSet rs = st.executeQuery(sqlSelect3);
+                    ){
+                while(rs.next()){
+                    content = rs.getString(2);
+                    l = rs.getInt(3);
+                    k = rs.getInt(4);
+                    MultipleChoice[] mul = new MultipleChoice[10];
+                    int flag2 = 0;
+                    try(
+                         Statement stt = conn.createStatement(
+                              ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                         ResultSet rss = stt.executeQuery(sqlSelect4 + flag1++);
+                         ){
+                     while(rss.next()){
+                         String cont = rss.getString(2);
+                         Choice[] c = new Choice[4];
+                             for(int j = 3,i = 0; i < 4; i++,j++){
+                                 c[i] = new Choice(rss.getString(j));
+                             }
+                         Choice answer = new Choice(rss.getString(7),rss.getString(8));
+                         mul[flag2] = new MultipleChoice(cont, c, answer);
+                         flag2++;
+
+                         }
+                     } 
+                    Question conversation = new Conversation(content, l, k, mul);
+                    list.addQuestion(conversation);
+
+                }
+         }
         return list;
     }
    /**

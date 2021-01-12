@@ -7,14 +7,10 @@ package EnglishTestSystem;
 import java.sql.Date;
 import java.util.Scanner;
 import java.sql.*;
-<<<<<<< HEAD
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-
-=======
 import java.util.*;
->>>>>>> 0464b92fc8fbad628c4b20a9397ffd448dc30a18
 /**
  *
  * @author Admin
@@ -26,6 +22,8 @@ public class Main {
      */
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         
+//        QuestionList list = DataBase.openGetData();
+//        System.out.println(list);
        Scanner s= new Scanner(System.in);
        //Nhap nguoi dung
        User studier;
@@ -71,19 +69,16 @@ public class Main {
          }
         }
     while(true);
-  //Ket thuc nhap nguoi dung
-<<<<<<< HEAD
-      
-       QuestionList list = new QuestionList();
-       list = DataBase.openGetData();
-        System.out.println(list);
-        studier.getPoint().add(9.5);
-        System.out.println(studier);
-        uList.upDateDB();
+//    //Ket thuc nhap nguoi dung
+//
+//         QuestionList list = new QuestionList();
+//         list = DataBase.openGetData();
+//          System.out.println(list);
+//          studier.getPoint().add(9.5);
+//          System.out.println(studier);
+//          uList.upDateDB();
        
 
-
-=======
   
         System.out.println("\n--------Luyen tap-----------\n Moi chon dang cau hoi:"
                 + "\n1.Multiple choice\n 2.Incomplete \n3.Conversation\n Chon=: ");
@@ -115,7 +110,6 @@ public class Main {
             //xu li
         }
  
->>>>>>> 0464b92fc8fbad628c4b20a9397ffd448dc30a18
     }
     
 }

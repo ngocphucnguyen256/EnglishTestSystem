@@ -31,7 +31,14 @@ public class MultipleChoice extends Question{
         this.answer = answer;
         this.choices = choice;
     }
-   
+
+    public MultipleChoice(String content, Choice[] choice, Choice answer) {
+        super(content, 0, 0);
+        this.answer = answer;
+        this.choices = choice;
+    }
+    
+    
 
     @Override
     public String toString() {

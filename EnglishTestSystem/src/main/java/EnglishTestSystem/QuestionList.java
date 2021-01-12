@@ -80,7 +80,7 @@ public class QuestionList {
         String str = "danh sach:\n";
         int i = 1;
         for(Question s : this.questions){
-            str += "\nCau " + i++ + s;
+            str += "\nCau " + i++ + ". "+ s;
         }
         return str;
     }
@@ -91,17 +91,18 @@ public class QuestionList {
         String str="\n";
         int chance=0; //ti le tra loi dung
         int count=1;
-       while (count<=choose){
-            for(Question q: this.questions){
-                System.out.println("\nCau " + count++ + q); 
-                System.out.println("\nNhap cau tra loi:");
-                String ans= s.nextLine();
-                str+= "Cau"+count+": ";
-                str+= q.checkAnswer(ans)+"\n";
-                if (q.checkAnswer(ans)=="Dung"){
-                    chance+=1;
-                }
-            } 
+        for(Question q: this.questions){
+                while (count<=choose){
+            
+                    System.out.println("\nCau " + count++ + q); 
+                    System.out.println("\nNhap cau tra loi:");
+                    String ans= s.nextLine();
+                    str+= "Cau"+count+": ";
+                    str+= q.checkAnswer(ans)+"\n";
+                    if (q.checkAnswer(ans)=="Dung"){
+                        chance+=1;
+                    }
+                } 
         }
        return str+ "So cau tra loi dung: "+chance+"/"+choose+"\n";
     }
