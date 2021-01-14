@@ -19,7 +19,6 @@ public class Main {
        User studier;
        UserList uList= new UserList();
        uList= DataBase.openGetDataUserList();
-       System.out.println(uList);
        String inp;
        int choose;
         do{
@@ -50,7 +49,7 @@ public class Main {
                      home=s.nextLine();
                      System.out.println(">Nhap gioi tinh");
                      gender=s.nextLine();
-                     System.out.println(">Nhap ngay thang nam sinh");
+                     System.out.println(">Nhap nam thang ngay sinh(!nam-thang-ngay!)");
                      Date dateOfBirth = Date.valueOf(s.nextLine());
                      User u = new User(name, gender, home, dateOfBirth);
                      uList.addUser(u);
@@ -67,8 +66,11 @@ public class Main {
 //Ket thuc nhap nguoi dung
  do{
        try{
-           System.out.println("******HE THONG TRAC NGHIEM TIENG ANH******\n 1.Luyen tap"
-                   + "\n2.Xem thong tin\n0.Thoat\n>Moi ban chon:");
+           System.out.println("******HE THONG TRAC NGHIEM TIENG ANH******");
+           System.out.println("1.Luyen tap.");
+           System.out.println("2.Xem thong tin.");
+           System.out.println("3.Sua thong tin ca nhan.");
+           System.out.println("0.Luu va thoat.");
            choose=s.nextInt();
            s.nextLine();
            QuestionList listData = DataBase.openGetData();
@@ -84,34 +86,41 @@ public class Main {
                     choose=s.nextInt();
                     s.nextLine();
                     list = listData.getMultiple();
-                    System.out.println(list.show(choose));
+                    studier.getPoint().add(list.showMultiple(choose));
                 }
                 else if(choose==2){
-                    Question q;
                     System.out.println("\n>Nhap muc do cau hoi ban muon lam:"
                             + "\n 1.De \n 2.Trung binh \n 3.Kho"
                             + "\n>Chon:");
                     choose=s.nextInt();
                     s.nextLine();
                     list = listData.getIncomplete().find(choose);
-                    System.out.println(list.showIncomplete());
+                    studier.getPoint().add(list.showIncomplete());
                 }
                 else if(choose==3){
-                    Question q;
                     System.out.println("\n>Nhap muc do cau hoi ban muon lam:"
                             + "\n 1.De \n 2.Trung binh \n 3.Kho"
                             + "\n>Chon:");
                     choose=s.nextInt();
                     s.nextLine();
                     list = listData.getConversation().find(choose);
-                    System.out.println(list.showConversation());
+                    studier.getPoint().add(list.showConversation());
                 }
            }
            else if(choose==2){
                System.out.println("\n-------Thong tin hoc vien---------");
                System.out.println(studier);
            }
+           else if(choose == 3){
+               System.out.println("===Chinh sua thong tin====");
+               studier.upDateUser();
+               System.out.println("====Thong tin cap nhat====");
+               System.out.println(studier);
+           }
            else if(choose==0){
+               uList.upDateDB();
+               System.out.println("---------Luu thanh cong--------------");
+               System.out.println("=============Ket thuc================");
                System.exit(0);
            }
        }catch(InputMismatchException ex){

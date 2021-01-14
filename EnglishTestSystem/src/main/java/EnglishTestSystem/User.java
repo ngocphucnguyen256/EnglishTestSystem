@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  *
@@ -42,40 +43,22 @@ public class User {
         this.homeTown=homeTown;
         this.dateOfBirth=dateOfBirth;
     }
-    /**
-     * @return the homeTown
-     */
-    public String getHomeTown() {
-        return homeTown;
-    }
-
-    /**
-     * @param homeTown the homeTown to set
-     */
-    public void setHomeTown(String homeTown) {
-        this.homeTown = homeTown;
-    }
-
-    /**
-     * @return the gender
-     */
-    public String getGender() {
-        return gender;
-    }
-
-    /**
-     * @param gender the gender to set
-     */
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
     
-  
-
+    /**
+     * sua thong tin cua hoc vien
+     */
+    public void upDateUser(){
+        Scanner s = new Scanner(System.in);
+                     System.out.println(">Nhap ten");
+                     this.name= s.nextLine();             
+                     System.out.println(">Nhap noi sinh");
+                     this.homeTown=s.nextLine();
+                     System.out.println(">Nhap gioi tinh");
+                     this.gender=s.nextLine();
+                     System.out.println(">Nhap nam thang ngay sinh(!nam-thang-ngay!)");
+                     this.dateOfBirth = Date.valueOf(s.nextLine());
+    }
     
-   
-
     @Override
     public String toString() {
         SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
@@ -86,7 +69,8 @@ public class User {
                 "\n Ngay bat dau: "+f.format(this.dateStart.getTime())+"\nCac lan lam kiem tra:\n"
                 ;
         for(Double d: this.getPoint()){
-            str+="\tLan "+ ++count +": "+ d+"\n";
+           
+            str+="\tLan "+ ++count +": "+ d +"\n";
         }
         return str+="Diem trung binh: "+ this.getAveragePoint() +"\n";
     }
@@ -157,7 +141,33 @@ public class User {
     public void setPoint(List<Double> point) {
         this.point = point;
     }
+   /**
+     * @return the homeTown
+     */
+    public String getHomeTown() {
+        return homeTown;
+    }
 
+    /**
+     * @param homeTown the homeTown to set
+     */
+    public void setHomeTown(String homeTown) {
+        this.homeTown = homeTown;
+    }
+
+    /**
+     * @return the gender
+     */
+    public String getGender() {
+        return gender;
+    }
+
+    /**
+     * @param gender the gender to set
+     */
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 
     
     

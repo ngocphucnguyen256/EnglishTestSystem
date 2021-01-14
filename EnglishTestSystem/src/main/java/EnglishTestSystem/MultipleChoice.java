@@ -5,9 +5,6 @@
  */
 package EnglishTestSystem;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  *
  * @author Admin
@@ -15,11 +12,6 @@ import java.util.List;
 public class MultipleChoice extends Question{
     private Choice[] choices= new Choice[5];
     private Choice answer;
-    private static int count = 0;
-    private int id;
-    {
-        id = ++count;
-    }
 
     public MultipleChoice() {
         super(null, 0, 0);
@@ -38,6 +30,7 @@ public class MultipleChoice extends Question{
         this.choices = choice;
     }
     
+    @Override
     public String showAnswer(){
            String str = this.getContent() + "\n";
            str += "Dap an: " + this.getAnswer().getContent();
@@ -54,6 +47,12 @@ public class MultipleChoice extends Question{
         
          
     }
+
+    /**
+     * ham check so cau hoi dung
+     * @param ans
+     * @return
+     */
     @Override
      public int checkAnswer(String ans) {
         int a = 65;

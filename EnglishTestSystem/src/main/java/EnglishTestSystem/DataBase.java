@@ -204,9 +204,7 @@ public class DataBase {
                     ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
         ){
                 String points = "";
-                for(Double s: studier.getPoint()){
-                    points += Double.toString(s) + ",";
-                }
+                points = studier.getPoint().stream().map(s -> Double.toString(s) + ",").reduce(points, String::concat);
                 
                 String sqlUpdate = "UPDATE user SET name = '"+ studier.getName() +"',"
                         + "home = '" + studier.getHomeTown() + "', "

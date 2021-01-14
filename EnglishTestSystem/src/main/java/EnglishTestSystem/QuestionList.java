@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collector;
 
 /**
  *
@@ -42,24 +41,21 @@ public class QuestionList {
     public QuestionList find(int l)
     {
       QuestionList temp =new QuestionList();
-        for(Question q : this.questions)
-        {
-            if(q.getLevel()==l)
-                temp.addQuestion(q);
-        }
+      this.questions.stream().filter(q -> (q.getLevel()==l)).forEachOrdered(q -> {
+          temp.addQuestion(q);
+         });
         return temp;
     }
     /**
      * tim kiem theo content
-     * @param c: chuoi ky tu
+     * @param kw: chuoi ky tu
      * @return List cau hoi
      */
     public QuestionList find(String kw){
         QuestionList temp = new QuestionList();
-        for(Question q : this.questions){
-            if(q.getContent().contains(kw))
-                temp.addQuestion(q);
-        }
+        this.questions.stream().filter(q -> (q.getContent().contains(kw))).forEachOrdered(q -> {
+            temp.addQuestion(q);
+         });
         return temp;
     }
     /**
@@ -69,11 +65,9 @@ public class QuestionList {
      */
     public QuestionList findKind(int k){
         QuestionList temp =new QuestionList();
-        for(Question q : this.questions)
-        {
-            if(q.getKind()==k)
-                temp.addQuestion(q);
-        }
+        this.questions.stream().filter(q -> (q.getKind()==k)).forEachOrdered(q -> {
+            temp.addQuestion(q);
+         });
         return temp;
     }
 
@@ -92,7 +86,7 @@ public class QuestionList {
      * @param choose
      * @return 
      */
-    public Double show(int choose){
+    public Double showMultiple(int choose){
         Scanner s= new Scanner(System.in);
         String str="\n";
         int chance=0; //ti le tra loi dung
@@ -106,10 +100,10 @@ public class QuestionList {
                     str+= "Cau"+count+": "+ q.showAnswer();                    
                     if (q.checkAnswer(ans)== 1){
                         chance+=1;
-                        str += "\n Tra loi: Dung !!\n";
+                        str += "\tTra loi: Dung !!\n\n";
                     }
                     else 
-                        str += "\n Tra loi: Sai !!\n";
+                        str += "\tTra loi: Sai !!\n\n";
                     
 
                     count++;
@@ -118,6 +112,7 @@ public class QuestionList {
                 } 
         }
         System.out.println(str+ "So cau tra loi dung: "+chance+"/"+choose+"\n");
+        System.out.println("Diem: " + 10.0/choose*chance);
         return 10.0/choose*chance;
     }
     
@@ -136,12 +131,12 @@ public class QuestionList {
                 String temp = s.nextLine();
                 ans += temp + ",";
             }
-            ans = s.nextLine();
             chance = a.checkAnswer(ans);
             System.out.println(a.showAnswer());
             break;
         }
-        
+        System.out.println("So cau tra loi dung: "+chance+"/" + (int)countPoint + "\n");
+        System.out.println("Diem: " + 10.0/countPoint*chance);
         return 10.0/countPoint * chance;
     }
     
@@ -164,33 +159,41 @@ public class QuestionList {
             System.out.println(a.showAnswer());
             break;
         }
-        
+        System.out.println("So cau tra loi dung: "+chance+"/" + (int)countPoint + "\n");
+        System.out.println("Diem: " + 10.0/countPoint*chance);
         return 10.0/countPoint * chance;
     }
+    /**
+     * lay ra list cau hoi Multiple
+     * @return 
+     */
     public QuestionList getMultiple(){
         QuestionList list = new QuestionList();
-        for(Question a : this.questions){
-            if(a instanceof MultipleChoice)
-                list.addQuestion(a);
-        }
+        this.questions.stream().filter(a -> (a instanceof MultipleChoice)).forEachOrdered(a -> {
+            list.addQuestion(a);
+         });
         return list;
     }
-    
+    /**
+     * lay ra list cau hoi incomplete
+     * @return 
+     */
     public QuestionList getIncomplete(){
         QuestionList list = new QuestionList();
-        for(Question a : this.questions){
-            if(a instanceof Incomplete)
-                list.addQuestion(a);
-        }
+        this.questions.stream().filter(a -> (a instanceof Incomplete)).forEachOrdered(a -> {
+            list.addQuestion(a);
+         });
         return list;
     }
-    
+    /**
+     * lay ra list cau hoi conversation
+     * @return 
+     */
     public QuestionList getConversation(){
         QuestionList list = new QuestionList();
-        for(Question a : this.questions){
-            if(a instanceof Conversation)
-                list.addQuestion(a);
-        }
+        this.questions.stream().filter(a -> (a instanceof Conversation)).forEachOrdered(a -> {
+            list.addQuestion(a);
+         });
         return list;
     }
 }
