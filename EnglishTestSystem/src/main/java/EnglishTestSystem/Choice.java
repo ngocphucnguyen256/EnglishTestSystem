@@ -56,9 +56,5 @@ public class Choice {
     public void setExplaination(String explaination) {
         this.explaination = explaination;
     }
-
-    int compareTo(String ans) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
 }
